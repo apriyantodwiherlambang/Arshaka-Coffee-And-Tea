@@ -1,0 +1,27 @@
+user :
+- id
+- name
+- email
+- phone
+- password
+- photo
+
+recipe :
+- id
+- photo
+- title
+- ingredients
+- video
+- date
+- user_id
+
+comment :
+- id
+- recipe_id
+- comment_text
+- user_id
+
+npm i express body-parser helmet
+npm i nodemon
+npm install
+npm i pg
