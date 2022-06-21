@@ -1,10 +1,10 @@
 const Postgre = require("pg").Pool;
 
 const connection = new Postgre({
-  user: "postgres",
-  host: "localhost",
-  database: "arshaka_resto",
-  password: "buburkacangijo",
+  user: process.env.host,
+  host: process.env.user,
+  database: process.env.password,
+  password: process.env.database,
   port: 5432,
 });
 

@@ -25,3 +25,4 @@ npm i express body-parser helmet
 npm i nodemon
 npm install
 npm i pg
+npm install dotenv
