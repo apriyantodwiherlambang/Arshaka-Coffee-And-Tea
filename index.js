@@ -1,10 +1,10 @@
 const express = require("express");
 require('dotenv').config();
 const app = express();
-
 const bodyParser = require("body-parser");
 const helmet = require("helmet");
 const port = 8000;
+const db = require('./db.js');
 
 // request = input
 // response = output
