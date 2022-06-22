@@ -1,6 +1,6 @@
 const Router = require("express").Router();
-const db = require("/db");
-const controller = require("../../controllers/userController");
+const db = require("../db");
+const controller = require("../controllers/userController");
 
 // FIND USERS
 Router.get("/users/find/id", controller.getUserId); // ke sini /users/find/id
