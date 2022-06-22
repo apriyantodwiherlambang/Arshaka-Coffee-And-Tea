@@ -37,6 +37,7 @@ const addUser = async (req, res) => {
       res.status(400).send("data gagal di tambah");
     }
   } catch (error) {
+    console.log("error",error)
     res.status(400).send("ada yang error");
   }
 };
