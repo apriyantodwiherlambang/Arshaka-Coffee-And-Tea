@@ -5,8 +5,8 @@ const bodyParser = require("body-parser");
 const helmet = require("helmet");
 const port = 8000;
 
-const userRoutes = require("./routes/users/searchUsersRoutes.js");
-const userDetailRoutes = require("./routes/users/usersRoutes");
+const userRoutes = require("./routes/searchUsersRoutes.js");
+const userDetailRoutes = require("./routes/usersRoutes");
 
 
 // request = input

@@ -1,4 +1,4 @@
-const db = require("../db");
+const db = require("./db");
 
 const getUserById = (id) => {
   return new Promise((resolve, reject) => {
