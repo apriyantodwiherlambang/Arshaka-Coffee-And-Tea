@@ -15,8 +15,13 @@ const getRecipes = async (req, res) => {
 const getLastesRecipes = async (req, res) => {
   try {
     const getDataRecipe = await model.getAllRecipe();
-    
-    res.send({ data: getDataRecipe.rows.length=5, jumlahDataRecipe: getDataRecipe.rowCount });
+    const data = getDataRecipe.rows;
+    const maxData = 5;
+
+    if(data > maxData){
+      data.length = maxData
+    }
+    res.send({ data: getDataRecipe.rows, jumlahDataRecipe: getDataRecipe.rowCount });
   } catch (error) {
     console.log("error", error)
     res.status(400).send("ada yang error");
@@ -38,4 +43,4 @@ const findNameRecipes = async (req, res) => {
   }
 };
 
-module.exports = { getRecipes, getLatestRecipes, findNameRecipes };
+module.exports = { getRecipes, getLastesRecipes, findNameRecipes };
