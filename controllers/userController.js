@@ -5,19 +5,14 @@ const getUserId = async (req, res) => {
     // const { id } = req.params; // ini
     const { id } = req.query; // ini
 
-    var CryptoJS = require("crypto-js");
-
-    // Decrypt
-    var bytes = CryptoJS.AES.decrypt(id, "secret key 123");
-    var originalText = bytes.toString(CryptoJS.enc.Utf8);
-
-    if (parseInt(originalText)) {
-      const getData = await model.getUserById(originalText);
+    if (parseInt(id)) {
+      const getData = await model.getUserById(id);
       res.send({ data: getData.rows, jumlahData: getData.rowCount });
     } else {
       res.status(400).send("angka tidak valid");
     }
   } catch (error) {
+    console.log("error", error)
     res.status(400).send("ada yang error");
   }
 };
