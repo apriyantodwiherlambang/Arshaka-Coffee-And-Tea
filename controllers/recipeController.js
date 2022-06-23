@@ -3,16 +3,10 @@ const model = require("../model/recipeModel");
 const getRecipeId = async (req, res) => {
   try {
     // const { id } = req.params; // ini
-    const { id } = req.query; // ini
+    const { recipe_id } = req.body; // ini
 
-    var CryptoJS = require("crypto-js");
-
-    // Decrypt
-    var bytes = CryptoJS.AES.decrypt(id, "secret key 1234");
-    var originalText = bytes.toString(CryptoJS.enc.Utf8);
-
-    if (parseInt(originalText)) {
-      const getData = await model.getRecipeById(originalText);
+    if (parseInt(recipe_id)) {
+      const getData = await model.getRecipeById(recipe_id);
       res.send({ data: getData.rows, jumlahData: getData.rowCount });
     } else {
       res.status(400).send("angka tidak valid");
@@ -45,22 +39,22 @@ const editRecipe = async (req, res) => {
     const { recipe_id, title, ingredients, photo_recipe, video_recipe } = req.body;
 
     // Check recipe by id
-    const getData = await model.getRecipeById(id);
+    const getData = await model.getRecipeById(recipe_id);
 
     if (getData.rowCount > 0) {
       let inputTitle = title || getData?.rows[0]?.title;
       let inputIngredients = ingredients || getData?.rows[0]?.ingredients;
-      let inputRecipePhoto = photo_recipe || getData?.rows[0]?.recipe_photo;
-      let inputRecipeVideo = video_recipe || getData?.rows[0]?.recipe_video;
+      let inputRecipePhoto = photo_recipe || getData?.rows[0]?.photo_recipe;
+      let inputRecipeVideo = video_recipe || getData?.rows[0]?.video_recipe;
 
       let message = "";
 
-      if (title) message += "nama,";
-      if (ingredients) message += "email,";
-      if (photo_recipe) message += "password,";
-      if (video_recipe) message += "phone,";
+      if (title) message += "title,";
+      if (ingredients) message += "ingredients,";
+      if (photo_recipe) message += "photo,";
+      if (video_recipe) message += "video,";
 
-      const editData = await model.editUser({
+      const editData = await model.editRecipe({
         title: inputTitle,
         ingredients: inputIngredients,
         photo_recipe: inputRecipePhoto,
@@ -84,16 +78,16 @@ const editRecipe = async (req, res) => {
 
 const deleteRecipe = async (req, res) => {
   try {
-    const { id } = req.body;
+    const { recipe_id } = req.body;
 
     // Check recipe by id
-    const getData = await model.getRecipeById(id);
+    const getDataRecipe = await model.getRecipeById(recipe_id);
 
-    if (getData.rowCount > 0) {
-      const deleteRecipe = await model.deleteRecipe(id);
+    if (getDataRecipe.rowCount > 0) {
+      const deleteRecipe = await model.deleteRecipe(recipe_id);
 
       if (deleteRecipe) {
-        res.send(`data Recipe ke ${id} berhasil di hapus`);
+        res.send(`data Recipe ke ${recipe_id} berhasil di hapus`);
       } else {
         res.status(400).send("data gagal di hapus");
       }

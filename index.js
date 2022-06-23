@@ -10,8 +10,6 @@ const userDetailRoutes = require("./routes/usersRoutes");
 const recipeRoutes = require("./routes/searchRecipesRoutes.js");
 const recipeDetailRoutes = require("./routes/recipesRoutes");
 
-
-
 // request = input
 // response = output
 app.use(helmet());

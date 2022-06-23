@@ -7,11 +7,11 @@ user :
 - photo
 
 recipe :
-- id
+- recipe_id
 - title
 - ingredients
-- photo
-- video
+- photo_recipe
+- video_recipe
 
 comment :
 - id

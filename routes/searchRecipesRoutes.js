@@ -7,6 +7,9 @@ const controller = require("../controllers/searchRecipeController");
 // AFTER
 Router.get("/recipes", controller.getRecipes);
 
+// GET RECIPE MAX 5
+Router.get("recipes/lastricapes", controller.getLatestRecipe );
+
 // FIND RECIPE BY NAME
 Router.get("/recipes/find/name", controller.findNameRecipes);
 

@@ -3,7 +3,7 @@ const model = require("../model/userModel");
 const getUserId = async (req, res) => {
   try {
     // const { id } = req.params; // ini
-    const { id } = req.query; // ini
+    const { id } = req.body; // ini
 
     if (parseInt(id)) {
       const getData = await model.getUserById(id);

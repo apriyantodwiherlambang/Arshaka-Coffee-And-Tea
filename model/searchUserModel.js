@@ -34,7 +34,7 @@ const getByEmail = (email) => {
 
 const getByName = (name) => {
   return new Promise((resolve, reject) => {
-    db.query(`SELECT * FROM users WHERE name = $1`, [name], (error, result) => {
+    db.query(`SELECT * FROM users WHERE name LIKE '%${name}%'`, (error, result) => {
       if (error) {
         reject(error);
       } else {
