@@ -3,7 +3,7 @@ const db = require("../db");
 const getAllUser = () => {
   return new Promise((resolve, reject) => {
     db.query(
-      `SELECT * FROM users`,
+      `SELECT * FROM users ORDER BY id ASC`,
       (error, result) => {
         if (error) {
             console.log("error",error)

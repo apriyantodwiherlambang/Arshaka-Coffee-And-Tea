@@ -8,12 +8,10 @@ user :
 
 recipe :
 - id
-- photo
 - title
 - ingredients
+- photo
 - video
-- date
-- user_id
 
 comment :
 - id

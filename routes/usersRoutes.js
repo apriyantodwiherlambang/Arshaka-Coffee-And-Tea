@@ -3,7 +3,7 @@ const db = require("../db");
 const controller = require("../controllers/userController");
 
 // FIND USERS
-Router.get("/users/find/id", controller.getUserId); // ke sini /users/find/id
+Router.get("/users/find/id", controller.getUserId);
 
 // POST PROFILE
 Router.post("/users/add", controller.addUser);

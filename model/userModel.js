@@ -66,21 +66,7 @@ const deleteUser = (id) => {
       if (error) {
         reject(error);
       } else {
-        deleteDetailUser(id)
-          .then(() => resolve(result))
-          .catch((_error) => reject(_error));
-      }
-    });
-  });
-};
-
-const deleteDetailUser = (id) => {
-  return new Promise((resolve, reject) => {
-    db.query(`DELETE FROM detail WHERE id = $1`, [id], (error, result) => {
-      if (error) {
-        reject(error);
-      } else {
-        resolve(result);
+          resolve(result)
       }
     });
   });
@@ -92,5 +78,4 @@ module.exports = {
   addDetailUser,
   editUser,
   deleteUser,
-  deleteDetailUser,
 };

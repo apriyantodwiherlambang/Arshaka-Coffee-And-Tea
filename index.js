@@ -7,6 +7,9 @@ const port = 8000;
 
 const userRoutes = require("./routes/searchUsersRoutes.js");
 const userDetailRoutes = require("./routes/usersRoutes");
+const recipeRoutes = require("./routes/searchRecipesRoutes.js");
+const recipeDetailRoutes = require("./routes/recipesRoutes");
+
 
 
 // request = input
@@ -21,6 +24,10 @@ app.use(bodyParser.urlencoded({ extended: false }));
 // Define all routes
 app.use("/", userRoutes);
 app.use("/", userDetailRoutes);
+
+// Define all recipes
+app.use("/", recipeRoutes);
+app.use("/", recipeDetailRoutes);
 
 // end of bottom code
 app.listen(port, () => {

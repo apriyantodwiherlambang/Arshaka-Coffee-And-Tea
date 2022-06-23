@@ -27,11 +27,8 @@ const addUser = async (req, res) => {
     const { id, name, email, password, phone, photo } = req.body;
 
     const addUser = await model.addUser({ id, name, email, password, phone, photo });
-    const addUserDetail = await model.addDetailUser({
-      userId: addUser.rows[0]?.id,
-    });
 
-    if (addUserDetail) {
+    if (addUser) {
       res.send("data berhasil di tambah");
     } else {
       res.status(400).send("data gagal di tambah");
@@ -52,9 +49,9 @@ const editUser = async (req, res) => {
     if (getData.rowCount > 0) {
       let inputNama = name || getData?.rows[0]?.name;
       let inputEmail = email || getData?.rows[0]?.email;
-      let inputPassword = password || result?.rows[0]?.password;
-      let inputPhone = phone || result?.rows[0]?.phone;
-      let inputPhoto = photo || result?.rows[0]?.photo;
+      let inputPassword = password || getData?.rows[0]?.password;
+      let inputPhone = phone || getData?.rows[0]?.phone;
+      let inputPhoto = photo || getData?.rows[0]?.photo;
 
       let message = "";
 
@@ -67,6 +64,9 @@ const editUser = async (req, res) => {
       const editData = await model.editUser({
         name: inputNama,
         email: inputEmail,
+        password: inputPassword,
+        phone: inputPhone,
+        photo: inputPhoto,
         id,
       });
 
