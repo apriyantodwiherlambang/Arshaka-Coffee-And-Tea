@@ -1,81 +1,108 @@
-const db = require("../db");
+const db = require('../db')
+
+const getAllUser = () => {
+  return new Promise((resolve, reject) => {
+    db.query(
+      'SELECT * FROM users ORDER BY user_id ASC',
+      (error, result) => {
+        if (error) {
+          console.log('error', error)
+          reject(error)
+        } else {
+          resolve(result)
+        }
+      }
+    )
+  })
+}
 
 const getUserById = (id) => {
   return new Promise((resolve, reject) => {
-    db.query(`SELECT * FROM users WHERE id = $1`, [id], (error, result) => {
+    db.query('SELECT * FROM users WHERE user_id = $1', [id], (error, result) => {
       if (error) {
-        reject(error);
+        reject(error)
       } else {
-        resolve(result);
+        resolve(result)
       }
-    });
-  });
-};
+    })
+  })
+}
+
+const getByName = (name) => {
+  return new Promise((resolve, reject) => {
+    db.query(`SELECT * FROM users WHERE name LIKE '%${name}%'`, (error, result) => {
+      if (error) {
+        reject(error)
+      } else {
+        resolve(result)
+      }
+    })
+  })
+}
+
+const getByEmail = (email) => {
+  return new Promise((resolve, reject) => {
+    db.query(`SELECT * FROM users WHERE email = $1`, [email], (error, result) => {
+      if (error) {
+        reject(error)
+      } else {
+        resolve(result)
+      }
+    }
+    )
+  })
+}
 
 const addUser = (props) => {
   return new Promise((resolve, reject) => {
     db.query(
-      `INSERT INTO users (id, name, email, password, phone, photo) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *`,
-      [props.id, props.name, props.email, props.password, props.phone, props.photo],
+      'INSERT INTO users (user_id, name, email, password, phone, user_photo) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *',
+      [props.user_id, props.name, props.email, props.password, props.phone, props.user_photo],
       (error, result) => {
         if (error) {
-          reject(error);
+          reject(error)
         } else {
-          resolve(result);
+          resolve(result)
         }
       }
-    );
-  });
-};
-
-const addDetailUser = (props) => {
-  return new Promise((resolve, reject) => {
-    db.query(
-      `INSERT INTO detail (id, name, email, password, phone, photo) VALUES ($1, $2, $3, $4, $5, $6)`,
-      [props.id, props.name, props.email, props.password, props.phone, props.photo],
-      (error, result) => {
-        if (error) {
-          reject(error);
-        } else {
-          resolve(result);
-        }
-      }
-    );
-  });
-};
+    )
+  })
+}
 
 const editUser = (props) => {
   return new Promise((resolve, reject) => {
     db.query(
-      `UPDATE users SET name = $1, email = $2, password = $3, photo = $4, phone = $5 WHERE id = $6`,
-      [props.name, props.email, props.password, props.phone, props.photo, props.id],
+      'UPDATE users SET name = $1, email = $2, password = $3, phone = $4, user_photo = $5 WHERE user_id = $6',
+      [props.name, props.email, props.password, props.phone, props.user_photo, props.user_id],
       (error, result) => {
         if (error) {
-          reject(error);
+          reject(error)
         } else {
-          resolve(result);
+          resolve(result)
         }
       }
-    );
-  });
-};
+    )
+  })
+}
 
 const deleteUser = (id) => {
   return new Promise((resolve, reject) => {
-    db.query(`DELETE FROM users WHERE id = $1`, [id], (error, result) => {
+    db.query('DELETE FROM users WHERE user_id = $1', [id], (error, result) => {
       if (error) {
-        reject(error);
+        reject(error)
       } else {
-          resolve(result)
+        resolve(result)
       }
-    });
-  });
-};
+    })
+  })
+}
 
 module.exports = {
+  getAllUser,
   getUserById,
+  getByName,
+  getByEmail,
   addUser,
-  addDetailUser,
   editUser,
-  deleteUser,
-};
+  deleteUser
+}
