@@ -56,8 +56,8 @@ const getByEmail = (email) => {
 const addUser = (props) => {
   return new Promise((resolve, reject) => {
     db.query(
-      'INSERT INTO users (user_id, name, email, password, phone, user_photo) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *',
-      [props.user_id, props.name, props.email, props.password, props.phone, props.user_photo],
+      'INSERT INTO users (name, email, password, phone, user_photo) VALUES ($1, $2, $3, $4, $5) RETURNING *',
+      [props.name, props.email, props.password, props.phone, props.user_photo],
       (error, result) => {
         if (error) {
           reject(error)

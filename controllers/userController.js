@@ -9,7 +9,7 @@ const getUsers = async (req, res) => {
     res.send({ data: getData.rows, jumlahData: getData.rowCount })
   } catch (error) {
     console.log('error', error)
-    res.status(400).send('ada yang error')
+    res.status(400).send(`Something's wrong`)
   }
 }
 
@@ -22,13 +22,13 @@ const getUserId = async (req, res) => {
       if (parseInt(user_id)) {
         res.send({ data: getData.rows, jumlahData: getData.rowCount })
       } else {
-        res.status(400).send('angka tidak valid')
+        res.status(400).send('Invalid number!')
       }
     } else 
-      res.status(400).send('user id tidak di temukan')
+      res.status(400).send('User id not found!')
   } catch (error) {
     console.log('error', error)
-    res.status(400).send('ada yang error')
+    res.status(400).send(`Something's wrong`)
   }
 }
 
@@ -42,7 +42,7 @@ const getUsersName = async (req, res) => {
       jumlahData: getData.rowCount
     })
   } catch (error) {
-    res.status(400).send('ada yang error')
+    res.status(400).send(`Something's wrong`)
   }
 }
 
@@ -57,54 +57,68 @@ const getEmailUsers = async (req, res) => {
         jumlahData: getData.rowCount
       })
     } else 
-      res.status(400).send('email tidak di temukan')
+      res.status(400).send('Email not found!')
 
   } catch (error) {
     console.log("error",error)
-    res.status(400).send('ada yang error')
+    res.status(400).send(`Something's wrong`)
   }
 }
 
 const addUser = async (req, res) => {
   try {
-    const { user_id, name, email, password, phone } = req.body
-    const salt = bcrypt.genSaltSync(15); // generate random string
-    const hash = bcrypt.hashSync(password, 10); // hash password
-    console.log(req.file)
-    const data = await model.getUserById(user_id);
-    const dataEmail = await model.getByEmail(email)
-
-    if ( data.rowCount > 0 ){
-      res.status(409).send(`duplicate user`)
-    } else if ( dataEmail.rowCount > 0) {
-      res.status(409).send(`duplicate email`)
-    } else {
-      const getDataUsers = await model.addUser({ user_id, name, email, password : hash, phone, user_photo: req.file })
-      res.status(200).send(`Success create user ${user_id}`)
-    }
-  } catch (error) {
-    console.log('error', error)
-    res.status(400).send('ada yang error')
-  }
-}
-
-const editUser = async (req, res) => {
-  try {
-    const { user_id, name, email, password, phone, user_photo } = req.file
+    const { name, email, password, phone } = req.body;
     const dataEmail = await model.getByEmail(email)
 
     const salt = bcrypt.genSaltSync(15); // generate random string
     const hash = bcrypt.hashSync(password, salt); // hash password
+     
+    if ( dataEmail.rowCount > 0) {
+      res.status(409).send(`Error : Duplicate email!`)
+    } else {
+      const getDataUsers = await model.addUser({ name, email, password: hash, phone })
+      res.status(200).send(`Success create user`)
+    }
+  } catch (error) {
+    console.log('error', error)
+    res.status(400).send(`Something's wrong`)
+  }
+}
+
+// const editUser = async (req, res) => {
+//   try {
+//     const { user_id, name, email, password, phone, } = req.body
+//     const dataEmail = await model.getByEmail(email)
+
+//     if ( dataEmail.rowCount > 0) {
+//       res.status(409).send(`duplicate email`)
+//     } else {
+//       const getdata = await model.editUser({user_id, name, email, password, phone, user_photo: req.file.path})
+//       res.status(200).send(`Success edit user id ${user_id}`)
+//     }
+//   } catch (error) {
+//     console.log(error)
+//     res.status(400).send('ada yang error')
+//   }
+// }  
+
+const editUser = async (req, res) => {
+  try {
+    const { user_id, name, email, password, phone, user_photo } = req.body
+    const dataEmail = await model.getByEmail(email)
+
+    // const salt = bcrypt.genSaltSync(15); // generate random string
+    // const hash = bcrypt.hashSync(password, salt); // hash password
 
     if ( dataEmail.rowCount > 0) {
       res.status(409).send(`duplicate email`)
     } else {
-      const getdata = await model.editUser({user_id, name, email, password: hash, phone, user_photo})
+      const getdata = await model.editUser({user_id, name, email, password, phone, user_photo})
       res.status(200).send(`Success edit user id ${user_id}`)
     }
   } catch (error) {
     console.log(error)
-    res.status(400).send('ada yang error')
+    res.status(400).send('Something went wrong!')
   }
 }
 
@@ -119,16 +133,16 @@ const deleteUser = async (req, res) => {
       const deleteUser = await model.deleteUser(user_id)
 
       if (deleteUser) {
-        res.send(`data id ke ${user_id} berhasil di hapus`)
+        res.send(`Successfully deleted user : ${user_id}`)
       } else {
-        res.status(400).send('data gagal di hapus')
+        res.status(400).send('User failed to delete!')
       }
     } else {
-      res.status(400).send('data tidak di temukan')
+      res.status(400).send('User not found!')
     }
   } catch (error) {
     console.log(error)
-    res.status(400).send('ada yang error')
+    res.status(400).send('Something went wrong!')
   }
 }
 

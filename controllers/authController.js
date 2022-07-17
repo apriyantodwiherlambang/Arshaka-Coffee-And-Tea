@@ -18,20 +18,20 @@ const login = async (req, res) => {
       if (checkPassword) {
         const token = jwt.sign(
           getEmailUsers.rows[0],
-          "784f6be02ff0832df7ad69245bd3e6c5a4cc4a8764c50b140b3845e62f8a81ee", 
-          { expiresIn: "24h" }
+          process.env.SECRET_KEY, 
+          { expiresIn: "1h" }
         );
 
         res.status(200).send(token);
       } else {
-        res.status(401).send("password tidak sesuai");
+        res.status(401).send("Invalid password!");
       }
     } else {
-      res.status(400).send("user tidak terdaftar");
+      res.status(400).send("User not register!");
     }
   } catch (error) {
     console.log(error);
-    res.status(400).send("ada yang error");
+    res.status(400).send("Something went wrong!");
   }
 };
 

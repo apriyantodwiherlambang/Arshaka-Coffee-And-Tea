@@ -2,7 +2,7 @@ const multer = require("multer");
 const path = require("path");
 const { v4: uuidv4 } = require("uuid");
 
-const storage = multer.diskStorage ({
+const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, "./images");
   },
@@ -16,7 +16,7 @@ const storage = multer.diskStorage ({
   },
 });
 
-const upload = multer ({
+const upload = multer({
   storage: storage,
   limits: {
     fileSize: 1000000, // 1MB
@@ -27,6 +27,7 @@ const upload = multer ({
 function fileFilter(req, file, cb) {
   // Allowed ext
   const filetypes = /jpeg|jpg|png/;
+
   // Check ext
   const extname = filetypes.test(path.extname(file.originalname).toLowerCase());
   // Check mime
@@ -39,15 +40,4 @@ function fileFilter(req, file, cb) {
   }
 }
 
-const middlewareUploadProfile = (req, res, next) => {
-  const uploadSingle = upload.single("user_photo");
-  uploadSingle(req, res, (err) => {
-    if (err) {
-      return res.status(400).send(err);
-    } else {
-      next();
-    }
-  });
-};
-
-module.exports = {middlewareUploadProfile};
+module.exports = upload;

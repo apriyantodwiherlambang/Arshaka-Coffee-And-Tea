@@ -1,12 +1,11 @@
 const fs = require("fs");
 const { promisify } = require("util");
 const unlinkAsync = promisify(fs.unlink);
-const multerUtils = require("./middleware/uploadProfile");
-const multerUtil = require("./middleware/uploadRecipeImages")
+const multerUtils = require("../multer");
 const multer = require("multer");
 
 const uploadSingle = (req, res, next) => {
-  const uploadSingle = multerUtils.single("image", 1);
+  const uploadSingle = multerUtils.single("user_photo");
 
   uploadSingle(req, res, (err) => {
     try {
@@ -22,22 +21,17 @@ const uploadSingle = (req, res, next) => {
 
       next();
     } catch (error) {
-      console.log("error",error)
       res.status(500).send(error?.message ?? "Upload Failed");
     }
   });
 };
 
 const uploadMultiple = (req, res, next) => {
-  const uploadSingle = multerUtils.array("images", 5);
+  const uploadSingle = multerUtils.array("user_photo", 5);
 
   uploadSingle(req, res, (err) => {
     try {
       if (err instanceof multer.MulterError) {
-        if (err.code === "LIMIT_UNEXPECTED_FILE"){
-          res.status(400).send("Error: File cannot be more than 5");
-          return;
-        }
         // A Multer error occurred when uploading.
         res.status(400).send(err?.message ?? "Something went wrong!");
         return;

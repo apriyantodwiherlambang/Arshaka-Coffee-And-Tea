@@ -15,7 +15,8 @@
     "uuid": "^8.3.2"
   },
   "scripts": {
-    "lint:scripts": "eslint --fix --ext .js --ignore-path .gitignore ."
+    "lint:scripts": "eslint --fix --ext .js --ignore-path .gitignore .",
+    "start": "node index.js"
   },
   "devDependencies": {
     "eslint": "^8.18.0",
