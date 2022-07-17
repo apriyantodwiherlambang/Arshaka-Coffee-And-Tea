@@ -5,7 +5,7 @@ const app = express()
 const bodyParser = require('body-parser')
 const helmet = require('helmet')
 const cors = require('cors')
-const port = 8000
+const port = process.env.PORT || 8000
 
 const userRoutes = require('./routes/usersRoutes')
 const recipeRoutes = require('./routes/recipesRoutes')
