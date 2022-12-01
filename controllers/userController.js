@@ -15,11 +15,11 @@ const getUsers = async (req, res) => {
 
 const getUserId = async (req, res) => {
   try {
-    const { user_id } = req.query
-    const getData = await model.getUserById(user_id)
+    const { id } = req.params
+    const getData = await model.getUserById(id)
 
     if (getData.rowCount > 0) {
-      if (parseInt(user_id)) {
+      if (parseInt(id)) {
         res.send({ data: getData.rows, jumlahData: getData.rowCount })
       } else {
         res.status(400).send('Invalid number!')
