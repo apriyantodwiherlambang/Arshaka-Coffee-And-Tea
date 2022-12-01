@@ -15,7 +15,7 @@ const getUsers = async (req, res) => {
 
 const getUserId = async (req, res) => {
   try {
-    const { user_id } = req.body
+    const { user_id } = req.query
     const getData = await model.getUserById(user_id)
 
     if (getData.rowCount > 0) {
@@ -34,7 +34,7 @@ const getUserId = async (req, res) => {
 
 const getUsersName = async (req, res) => {
   try {
-    const { name } = req.body
+    const { name } = req.query
     const getData = await model.getByName(name)
 
     res.send({
@@ -48,7 +48,7 @@ const getUsersName = async (req, res) => {
 
 const getEmailUsers = async (req, res) => {
   try {
-    const { email } = req.body
+    const { email } = req.query
     const getData = await model.getByEmail(email)
 
     if (getData.rowCount > 0) {
