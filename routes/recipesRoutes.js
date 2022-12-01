@@ -1,30 +1,14 @@
 const Router = require('express').Router()
 const controller = require('../controllers/recipeController')
 
-// FIND RECIPE
-Router.get('/recipes/find/id', controller.getRecipeId)
+Router.get('/', controller.getRecipes) // GET ALL RECIPES
+Router.get('/find/:recipe_id', controller.getRecipeId) // FIND RECIPE BY ID
+Router.get('/find', controller.getRecipeName) // FIND RECIPE BY NAME
+Router.get('/find/user_id', controller.getRecipeUser) // FIND RECIPE BY USER
+Router.get('/latestrecipes', controller.getLatestRecipes) // GET RECIPE MAX 5
 
-// POST RECIPE
-Router.post('/recipes/add', controller.addRecipe)
-
-// EDIT RECIPE
-Router.patch('/recipes/edit', controller.editRecipe)
-
-// DELETE RECIPE
-Router.delete('/recipes/delete', controller.deleteRecipe)
-
-// GET RECIPES
-
-// GET ALL RECIPES
-Router.get('/recipes', controller.getRecipes)
-
-// FIND RECIPE BY NAME
-Router.get('/recipes/find/name', controller.getRecipeName)
-
-// FIND RECIPE BY USER
-Router.get('/recipes/find/user', controller.getRecipeUser)
-
-// GET RECIPE MAX 5
-Router.get('/recipes/latestrecipes', controller.getLatestRecipes)
+Router.post('/add', controller.addRecipe) // POST RECIPE
+Router.patch('/edit', controller.editRecipe) // EDIT RECIPE
+Router.delete('/delete', controller.deleteRecipe) // DELETE RECIPE
 
 module.exports = Router

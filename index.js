@@ -34,10 +34,10 @@ var corsOptionsDelegate = function (req, callback) {
   callback(null, corsOptions); // callback expects two parameters: error and options
 };
 
-app.use('/', cors(corsOptionsDelegate), userRoutes); // Define all user routes
-app.use('/', cors(corsOptionsDelegate), recipeRoutes); // Define all recipes
-app.use('/', cors(corsOptionsDelegate), commentRoutes); // Define all comments
-app.use('/', cors(corsOptionsDelegate), authRoutes);
+app.use('/users', cors(corsOptionsDelegate), userRoutes); // Define all user routes
+app.use('/recipes', cors(corsOptionsDelegate), recipeRoutes); // Define all recipes
+app.use('/comments', cors(corsOptionsDelegate), commentRoutes); // Define all comments
+app.use('/auth', cors(corsOptionsDelegate), authRoutes);
 
 // end of bottom code
 app.listen(port, () => {

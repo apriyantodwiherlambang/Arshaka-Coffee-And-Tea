@@ -14,24 +14,27 @@ const getRecipes = async (req, res) => {
 
 const getRecipeId = async (req, res) => {
   try {
-    // const { id } = req.params; // ini
-    const { recipe_id } = req.body // ini
+    const { recipe_id } = req.params;
+    const getData = await model.getRecipeById(recipe_id);
 
-    if (parseInt(recipe_id)) {
-      const getData = await model.getRecipeById(recipe_id)
-      res.send({ data: getData.rows, jumlahData: getData.rowCount })
-    } else {
-      res.status(400).send('angka tidak valid')
-    }
+    if (getData.rowCount > 0) {
+      if (parseInt(recipe_id)) {
+        res.send({ data: getData.rows, jumlahData: getData.rowCount })
+      } else {
+        res.status(400).send('Invalid number!')
+      }
+    } else 
+      res.status(400).send('Recipe id not found!')
   } catch (error) {
     console.log('error', error)
-    res.status(400).send('ada yang error')
+    res.status(400).send(`Something's wrong`)
   }
 }
 
+
 const getRecipeName = async (req, res) => {
   try {
-    const { title } = req.body
+    const { title } = req.query
     const getDataRecipe = await model.getRecipeByName(title)
 
     res.send({
@@ -46,7 +49,7 @@ const getRecipeName = async (req, res) => {
 
 const getRecipeUser = async (req, res) => {
   try {
-    const { user_id } = req.body
+    const { user_id } = req.query
     const getDataRecipe = await model.getRecipeByUser(user_id)
 
     res.send({
@@ -83,7 +86,14 @@ const addRecipe = async (req, res) => {
     const addRecipe = await model.addRecipe(recipes)
 
     if (addRecipe) {
-      res.send('data berhasil di tambah')
+      res.send(
+        {
+          result: {
+            message: 'Berhasil Menambahkan Data Recipes',
+            code: 200
+          }
+        }
+      )
     } else {
       res.status(400).send('data gagal di tambah')
     }

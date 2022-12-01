@@ -3,6 +3,7 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 
 const login = async (req, res) => {
+  console.log(req.body)
   try {
     const { email, password } = req.body;
     // console.log(req.body)
@@ -18,11 +19,16 @@ const login = async (req, res) => {
       if (checkPassword) {
         const token = jwt.sign(
           getEmailUsers.rows[0],
-          process.env.SECRET_KEY, 
+          process.env.SECRET_KEY,
           { expiresIn: "1h" }
         );
 
-        res.status(200).send(token);
+        res.status(200).send({
+          result: {
+            auth_token: token,
+            user: getEmailUsers.rows[0]
+          }
+        });
       } else {
         res.status(401).send("Invalid password!");
       }

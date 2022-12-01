@@ -1,22 +1,12 @@
 const Router = require('express').Router()
 const controller = require('../controllers/commentController')
 
-// GET ALL RECIPES
-Router.get('/comments', controller.getComments)
+Router.get('/', controller.getComments) // GET ALL COMMENTS
+Router.get('/find/id', controller.getCommentId) // FIND COMMENT BY ID
+Router.get('/find/recipe', controller.getCommentRecipe) // FIND COMMENT BY RECIPE
 
-// FIND COMMENT BY ID
-Router.get('/comments/find/id', controller.getCommentId)
-
-// FIND COMMENT BY RECIPE
-Router.get('/comments/find/recipe', controller.getCommentRecipe)
-
-// ADD COMMENT
-Router.post('/comments/add', controller.addComment)
-
-// EDIT COMMENT
-Router.patch('/comments/edit', controller.editComment)
-
-// DELETE COMMENT
-Router.delete('/comments/delete', controller.deleteComment)
+Router.post('/add', controller.addComment) // ADD COMMENT
+Router.patch('/edit', controller.editComment) // EDIT COMMENT
+Router.delete('/delete', controller.deleteComment) // DELETE COMMENT
 
 module.exports = Router
