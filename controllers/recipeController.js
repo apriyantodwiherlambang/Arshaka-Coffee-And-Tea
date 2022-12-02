@@ -3,7 +3,7 @@ const moment = require('moment')
 
 const getRecipes = async (req, res) => {
   try {
-    const getDataRecipe = await model.getAllRecipe()
+    const getDataRecipe = await model.getAllRecipes()
 
     res.send({ data: getDataRecipe.rows, jumlahDataRecipe: getDataRecipe.rowCount })
   } catch (error) {
@@ -34,7 +34,7 @@ const getRecipeId = async (req, res) => {
 
 const getRecipeName = async (req, res) => {
   try {
-    const { title } = req.query
+    const { title } = req.params
     const getDataRecipe = await model.getRecipeByName(title)
 
     res.send({
@@ -147,7 +147,7 @@ const editRecipe = async (req, res) => {
 
 const deleteRecipe = async (req, res) => {
   try {
-    const { recipe_id } = req.body
+    const { recipe_id } = req.params
 
     // Check recipe by id
     const getDataRecipe = await model.getRecipeById(recipe_id)

@@ -1,6 +1,6 @@
 const db = require('../db')
 
-const getAllRecipe = () => {
+const getAllRecipes = () => {
   return new Promise((resolve, reject) => {
     db.query(
       'SELECT * FROM recipes ORDER BY recipe_id ASC',
@@ -105,7 +105,7 @@ const deleteRecipe = (id) => {
 }
 
 module.exports = {
-  getAllRecipe,
+  getAllRecipes,
   getRecipeById,
   getRecipeByName,
   getRecipeByUser,

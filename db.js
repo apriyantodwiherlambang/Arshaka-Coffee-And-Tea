@@ -1,16 +1,16 @@
-const { Pool, Client } = require("pg");
-require ("dotenv").config();
-const Postgre = require('pg').Pool;
+const { Pool, Client } = require('pg')
+require('dotenv').config()
+const Postgre = require('pg').Pool
 
-let connection;
+let connection
 
-if (process.env.ENV_MODE === "prod"){
-connection = new Client({
-  connectionString: process.env.DB_URI,
-  ssl: {
-    rejectUnauthorized: false,
-  },
-});
+if (process.env.ENV_MODE === 'prod') {
+  connection = new Client({
+    connectionString: process.env.DB_URI,
+    ssl: {
+      rejectUnauthorized: false
+    }
+  })
 } else {
   connection = new Pool({
     user: process.env.host,
