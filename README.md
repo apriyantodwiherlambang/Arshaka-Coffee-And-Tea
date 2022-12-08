@@ -1,4 +1,3 @@
-
 <div id="top"></div>
 
 <!-- PROJECT LOGO -->
@@ -16,11 +15,15 @@
 </div>
 
 <!-- ABOUT THE PROJECT -->
+
 ## About The Project
+
 Mama Recipe Restful API is a service food recipe for multiple food categories and provide all the ingredients with video steps managed by owner recipe.
 
 ### Built With
+
 This app was built with some technologies below:
+
 - [Node.js](https://nodejs.org/en/)
 - [Express.js](https://expressjs.com/)
 - [JSON Web Tokens](https://jwt.io/)
@@ -31,31 +34,36 @@ This app was built with some technologies below:
 - [Bcrypt](https://www.npmjs.com/package/bcrypt)
 
 <!-- GETTING STARTED -->
+
 ## Getting Started
 
 ### Prerequisites
 
 This is an example of how to list things you need to use the software and how to install them.
 
-* [Node.js](https://nodejs.org/en/download/)
+- [Node.js](https://nodejs.org/en/download/)
 
 ### Requirements
-* [Node.js](https://nodejs.org/en/)
-* [Postman](https://www.getpostman.com/) for testing
-* [Database](https://www.postgresql.org/) I used PostgreSQL
+
+- [Node.js](https://nodejs.org/en/)
+- [Postman](https://www.getpostman.com/) for testing
+- [Database](https://www.postgresql.org/) I used PostgreSQL
 
 ### Installation
 
 - Clone the Repo
+
 ```
-git clone https://github.com/rezcode/food-recipe-expressJS.git
+git clone https://github.com/apriyantodwiherlambang/Arshaka-Coffee-And-Tea
 ```
 
 ```
 - Install Module
 ```
+
 npm install
-```
+
+````
 - Create new database named `mama_recipes`
 - Restore database file in `database/db` using pgadmin4
 
@@ -80,17 +88,17 @@ ENV_MODE=
 DB_URI=
 
 SECRET_KEY=
-```
-
+````
 
 ## REST API
 
-You can view my Postman collection [here](https://documenter.getpostman.com/view/21471690/VV51taEf)
+You can view my Postman collection [here](https://www.getpostman.com/collections/031fa12d160b7d8c826e)
 </br>
 
 <img src="https://res.cloudinary.com/dll4afml9/image/upload/v1662476868/screenshots/Screen_Shot_2022-09-06_at_23.06.49_y2fhb8.png" alt="Postman-documentation">
 
 ## Related Project
+
 :rocket: [`Backend Mama Recipe`](https://github.com/apriyantodwiherlambang/Arshaka-Coffee-And-Tea)
 
 :rocket: [`Frontend Mama Recipe`]
@@ -100,6 +108,7 @@ You can view my Postman collection [here](https://documenter.getpostman.com/view
 My Email : dwiherlambangapri@gmail.com
 
 ## License
+
 Distributed under the [MIT](/LICENSE) License.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
