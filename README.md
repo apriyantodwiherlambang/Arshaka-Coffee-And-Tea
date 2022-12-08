@@ -92,7 +92,7 @@ SECRET_KEY=
 
 ## REST API
 
-You can view my Postman collection [here](https://www.getpostman.com/collections/031fa12d160b7d8c826e)
+You can view my Postman collection [here](https://documenter.getpostman.com/view/20115143/2s8YzQX4u4)
 </br>
 
 <img src="https://res.cloudinary.com/dll4afml9/image/upload/v1662476868/screenshots/Screen_Shot_2022-09-06_at_23.06.49_y2fhb8.png" alt="Postman-documentation">
