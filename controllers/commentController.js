@@ -4,32 +4,49 @@ const getComments = async (req, res) => {
   try {
     const getDataComment = await model.getAllComment()
 
-    res.send({ data: getDataComment.rows, jumlahDataComment: getDataComment.rowCount })
+    res.send({ 
+      data: getDataComment.rows, 
+      jumlahDataComment: getDataComment.rowCount 
+    })
   } catch (error) {
     console.log('error', error)
-    res.status(400).send('ada yang error')
+    res.send(
+      {
+        result: {
+          message: 'Something went wrong',
+          code: 400
+        }
+      })
   }
 }
 
 const getCommentId = async (req, res) => {
   try {
-    const { comment_id } = req.body
+    const { comment_id } = req.params
 
     if (parseInt(comment_id)) {
       const getDataComment = await model.getCommentById(comment_id)
-      res.send({ data: getDataComment.rows, jumlahDataComment: getDataComment.rowCount })
+      res.send({ 
+        data: getDataComment.rows, 
+        jumlahDataComment: getDataComment.rowCount })
     } else {
       res.status(400).send('angka tidak valid')
     }
   } catch (error) {
     console.log('error', error)
-    res.status(400).send('ada yang error')
+    res.send(
+      {
+        result: {
+          message: 'Something went wrong',
+          code: 400
+        }
+      })
   }
 }
 
 const getCommentRecipe = async (req, res) => {
   try {
-    const { recipe_id } = req.body
+    const { recipe_id } = req.params
     const getDataComment = await model.getCommentByRecipe(recipe_id)
 
     res.send({
@@ -38,7 +55,13 @@ const getCommentRecipe = async (req, res) => {
     })
   } catch (error) {
     console.log('error', error)
-    res.status(400).send('ada yang error')
+    res.send(
+      {
+        result: {
+          message: 'Something went wrong',
+          code: 400
+        }
+      })
   }
 }
 
@@ -55,7 +78,13 @@ const addComment = async (req, res) => {
     }
   } catch (error) {
     console.log('error', error)
-    res.status(400).send('ada yang error')
+    res.send(
+      {
+        result: {
+          message: 'Something went wrong',
+          code: 400
+        }
+      })
   }
 }
 
@@ -94,13 +123,19 @@ const editComment = async (req, res) => {
     }
   } catch (error) {
     console.log(error)
-    res.status(400).send('ada yang error')
+    res.send(
+      {
+        result: {
+          message: 'Something went wrong',
+          code: 400
+        }
+      })
   }
 }
 
 const deleteComment = async (req, res) => {
   try {
-    const { comment_id } = req.body
+    const { comment_id } = req.params
 
     // Check comment by id
     const getDataComment = await model.getCommentById(comment_id)
@@ -118,7 +153,13 @@ const deleteComment = async (req, res) => {
     }
   } catch (error) {
     console.log(error)
-    res.status(400).send('ada yang error')
+    res.send(
+      {
+        result: {
+          message: 'Something went wrong',
+          code: 400
+        }
+      })
   }
 }
 

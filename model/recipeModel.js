@@ -41,7 +41,7 @@ const getRecipeByName = (title) => {
 
 const getRecipeByUser = (id) => {
   return new Promise((resolve, reject) => {
-    db.query('SELECT * FROM recipes WHERE user_id = $1 ', [id], (error, result) => {
+    db.query('SELECT r.*, u.* FROM recipes r LEFT JOIN users u ON r.user_id = u.user_id WHERE r.user_id = $1 ', [id], (error, result) => {
       if (error) {
         reject(error)
       } else {

@@ -4,7 +4,7 @@ const unlinkAsync = promisify(fs.unlink);
 const multerUtils = require("../multer");
 const multer = require("multer");
 
-const uploadSingle = (req, res, next) => {
+const uploadUserPhoto = (req, res, next) => {
   const uploadSingle = multerUtils.single("user_photo");
 
   uploadSingle(req, res, (err) => {
@@ -26,8 +26,8 @@ const uploadSingle = (req, res, next) => {
   });
 };
 
-const uploadMultiple = (req, res, next) => {
-  const uploadSingle = multerUtils.array("user_photo", 5);
+const uploadRecipeImages = (req, res, next) => {
+  const uploadSingle = multerUtils.array("recipe_photo");
 
   uploadSingle(req, res, (err) => {
     try {
@@ -54,4 +54,4 @@ const deleteFile = async (req, res) => {
   res.send("DELETE COMPLETED!");
 };
 
-module.exports = { deleteFile, uploadMultiple, uploadSingle };
+module.exports = { deleteFile, uploadRecipeImages, uploadUserPhoto };

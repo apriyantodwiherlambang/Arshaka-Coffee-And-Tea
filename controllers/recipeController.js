@@ -8,7 +8,13 @@ const getRecipes = async (req, res) => {
     res.send({ data: getDataRecipe.rows, jumlahDataRecipe: getDataRecipe.rowCount })
   } catch (error) {
     console.log('error', error)
-    res.status(400).send('ada yang error')
+    res.send(
+      {
+        result: {
+          message: 'Something went wrong',
+          code: 400
+        }
+      })
   }
 }
 
@@ -19,15 +25,25 @@ const getRecipeId = async (req, res) => {
 
     if (getData.rowCount > 0) {
       if (parseInt(recipe_id)) {
-        res.send({ data: getData.rows, jumlahData: getData.rowCount })
+        res.send(
+          {
+            data: getData.rows,
+            jumlahData: getData.rowCount
+          })
       } else {
         res.status(400).send('Invalid number!')
       }
-    } else 
+    } else
       res.status(400).send('Recipe id not found!')
   } catch (error) {
     console.log('error', error)
-    res.status(400).send(`Something's wrong`)
+    res.send(
+      {
+        result: {
+          message: 'Something went wrong',
+          code: 400
+        }
+      })
   }
 }
 
@@ -37,28 +53,42 @@ const getRecipeName = async (req, res) => {
     const { title } = req.params
     const getDataRecipe = await model.getRecipeByName(title)
 
-    res.send({
+    res.send(
+      {
       data: getDataRecipe.rows,
       jumlahData: getDataRecipe.rowCount
     })
   } catch (error) {
     console.log('error', error)
-    res.status(400).send('ada yang error')
+    res.send(
+      {
+        result: {
+          message: 'Something went wrong',
+          code: 400
+        }
+      })
   }
 }
 
 const getRecipeUser = async (req, res) => {
   try {
-    const { user_id } = req.query
+    const { user_id } = req.params
     const getDataRecipe = await model.getRecipeByUser(user_id)
 
-    res.send({
+    res.send(
+      {
       data: getDataRecipe.rows,
       jumlahData: getDataRecipe.rowCount
     })
   } catch (error) {
     console.log('error', error)
-    res.status(400).send('ada yang error')
+    res.send(
+      {
+        result: {
+          message: 'Something went wrong',
+          code: 400
+        }
+      })
   }
 }
 
@@ -71,16 +101,27 @@ const getLatestRecipes = async (req, res) => {
     if (data > maxData) {
       data.length = maxData
     }
-    res.send({ data, jumlahDataRecipe: data.length })
+    res.send(
+      { 
+        data, 
+        jumlahDataRecipe: data.length 
+      })
   } catch (error) {
     console.log('error', error)
-    res.status(400).send('ada yang error')
+    res.send(
+      {
+        result: {
+          message: 'Something went wrong',
+          code: 400
+        }
+      })
   }
 }
 
 const addRecipe = async (req, res) => {
   try {
-    const recipes = req.body
+    const { recipe_id, user_id } = req.query
+    const { title, ingredients, recipe_photo, recipe_videos } = req.body
     recipes.created_at = moment().format()
 
     const addRecipe = await model.addRecipe(recipes)
@@ -88,8 +129,8 @@ const addRecipe = async (req, res) => {
     if (addRecipe) {
       res.send(
         {
-          result: {
-            message: 'Berhasil Menambahkan Data Recipes',
+          result: { 
+            message: 'Berhasil Menambahkan Data Recipe',
             code: 200
           }
         }
@@ -99,13 +140,20 @@ const addRecipe = async (req, res) => {
     }
   } catch (error) {
     console.log('error', error)
-    res.status(400).send('ada yang error')
+    res.send(
+      {
+        result: {
+          message: 'Something went wrong',
+          code: 400
+        }
+      })
   }
 }
 
 const editRecipe = async (req, res) => {
   try {
-    const { recipe_id, title, ingredients, recipe_photo, recipe_videos } = req.body
+    const { recipe_id, user_id } = req.query
+    const { title, ingredients, recipe_photo, recipe_videos } = req.body
 
     // Check recipe by id
     const getData = await model.getRecipeById(recipe_id)
@@ -141,7 +189,13 @@ const editRecipe = async (req, res) => {
     }
   } catch (error) {
     console.log(error)
-    res.status(400).send('ada yang error')
+    res.send(
+      {
+        result: {
+          message: 'Something went wrong',
+          code: 400
+        }
+      })
   }
 }
 
@@ -165,7 +219,13 @@ const deleteRecipe = async (req, res) => {
     }
   } catch (error) {
     console.log(error)
-    res.status(400).send('ada yang error')
+    res.send(
+      {
+        result: {
+          message: 'Something went wrong',
+          code: 400
+        }
+      })
   }
 }
 

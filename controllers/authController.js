@@ -3,11 +3,11 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 
 const login = async (req, res) => {
-  console.log(req.body)
+  // console.log(req.body)
   try {
     const { email, password } = req.body;
     // console.log(req.body)
-    const getEmailUsers = await model.getByEmail(email);
+    const getEmailUsers = await model.getUserByEmail(email);
 
     if (getEmailUsers.rowCount) {
       // validate password
@@ -37,7 +37,13 @@ const login = async (req, res) => {
     }
   } catch (error) {
     console.log(error);
-    res.status(400).send("Something went wrong!");
+    res.send(
+      {
+        result: {
+          message: 'Something went wrong',
+          code: 400
+        }
+      });
   }
 };
 

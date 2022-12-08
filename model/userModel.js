@@ -29,11 +29,11 @@ const getUserById = (id) => {
   })
 }
 
-const getUserByName = (userName) => {
+const getUserByName = (name) => {
   return new Promise((resolve, reject) => {
     db.query(
       'SELECT * FROM users WHERE name = $1',
-      [userName],
+      [name],
       (error, result) => {
         if (error) {
           reject(error)
@@ -64,8 +64,8 @@ const getUserByEmail = (email) => {
 const addUser = (props) => {
   return new Promise((resolve, reject) => {
     db.query(
-      'INSERT INTO users (name, email, password, phone, user_photo) VALUES ($1, $2, $3, $4, $5) RETURNING *',
-      [props.name, props.email, props.password, props.phone, props.user_photo],
+      'INSERT INTO users (name, email, password, phone) VALUES ($1, $2, $3, $4) RETURNING *',
+      [props.name, props.email, props.password, props.phone],
       (error, result) => {
         if (error) {
           reject(error)
