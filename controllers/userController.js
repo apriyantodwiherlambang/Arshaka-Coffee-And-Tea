@@ -6,21 +6,18 @@ const getUsers = async (req, res) => {
   try {
     const getData = await model.getAllUsers()
 
-    res.send(
-      {
-        data: getData.rows,
-        jumlahData: getData.rowCount
-      }
-    )
+    res.send({
+      data: getData.rows,
+      jumlahData: getData.rowCount
+    })
   } catch (error) {
     console.log('error', error)
-    res.send(
-      {
-        result: {
-          message: 'Something went wrong',
-          code: 400
-        }
-      })
+    res.send({
+      result: {
+        message: 'Something went wrong',
+        code: 400
+      }
+    })
   }
 }
 
@@ -31,27 +28,29 @@ const getUserId = async (req, res) => {
 
     if (getData.rowCount > 0) {
       if (parseInt(id)) {
-        res.send(
-          {
-            data: getData.rows,
-            jumlahData: getData.rowCount
-          }
-        )
+        res.send({
+          data: getData.rows,
+          jumlahData: getData.rowCount
+        })
       } else {
         res.status(400).send('Invalid number!')
       }
     } else {
-      res.status(400).send('User id not found!')
-    }
-  } catch (error) {
-    console.log('error', error)
-    res.send(
-      {
+      res.send({
         result: {
-          message: 'Something went wrong',
+          message: 'User id not found!',
           code: 400
         }
       })
+    }
+  } catch (error) {
+    console.log('error', error)
+    res.send({
+      result: {
+        message: 'Something went wrong',
+        code: 400
+      }
+    })
   }
 }
 
@@ -60,19 +59,17 @@ const getUsersName = async (req, res) => {
     const { user_name } = req.params
     const getData = await model.getUserByName(user_name)
 
-    res.send(
-      {
-        data: getData.rows,
-        jumlahData: getData.rowCount
-      })
+    res.send({
+      data: getData.rows,
+      jumlahData: getData.rowCount
+    })
   } catch (error) {
-    res.send(
-      {
-        result: {
-          message: 'Something went wrong',
-          code: 400
-        }
-      })
+    res.send({
+      result: {
+        message: 'Something went wrong',
+        code: 400
+      }
+    })
   }
 }
 
@@ -82,23 +79,21 @@ const getEmailUsers = async (req, res) => {
     const getData = await model.getUserByEmail(email)
 
     if (getData.rowCount > 0) {
-      res.send(
-        {
-          data: getData.rows,
-          jumlahData: getData.rowCount
-        })
+      res.send({
+        data: getData.rows,
+        jumlahData: getData.rowCount
+      })
     } else {
       res.status(400).send('Email not found!')
     }
   } catch (error) {
     console.log('error', error)
-    res.send(
-      {
-        result: {
-          message: 'Something went wrong',
-          code: 400
-        }
-      })
+    res.send({
+      result: {
+        message: 'Something went wrong',
+        code: 400
+      }
+    })
   }
 }
 
@@ -127,13 +122,12 @@ const addUser = async (req, res) => {
     }
   } catch (error) {
     console.log('error', error)
-    res.send(
-      {
-        result: {
-          message: 'Something went wrong',
-          code: 400
-        }
-      })
+    res.send({
+      result: {
+        message: 'Something went wrong',
+        code: 400
+      }
+    })
   }
 }
 
@@ -143,8 +137,8 @@ const editUser = async (req, res) => {
     const { name, email, password, phone, user_photo } = req.body
     const dataEmail = await model.getUserByEmail(email)
 
-    const salt = bcrypt.genSaltSync(15); // generate random string
-    const hash = bcrypt.hashSync(password, salt); // hash password
+    const salt = bcrypt.genSaltSync(15) // generate random string
+    const hash = bcrypt.hashSync(password, salt) // hash password
 
     if (dataEmail.rowCount > 0) {
       res.status(409).send('duplicate email')
@@ -160,13 +154,12 @@ const editUser = async (req, res) => {
     }
   } catch (error) {
     console.log(error)
-    res.send(
-      {
-        result: {
-          message: 'Something went wrong',
-          code: 400
-        }
-      })
+    res.send({
+      result: {
+        message: 'Something went wrong',
+        code: 400
+      }
+    })
   }
 }
 
@@ -181,13 +174,12 @@ const deleteUser = async (req, res) => {
       const deleteUser = await model.deleteUser(id)
 
       if (deleteUser) {
-        res.send(
-          {
-            result: {
-              message: `Successfully deleted user : ${id}`,
-              code: 200
-            }
-          })
+        res.send({
+          result: {
+            message: `Successfully deleted user : ${id}`,
+            code: 200
+          }
+        })
       } else {
         res.status(400).send('User failed to delete!')
       }
@@ -196,13 +188,12 @@ const deleteUser = async (req, res) => {
     }
   } catch (error) {
     console.log(error)
-    res.send(
-      {
-        result: {
-          message: 'Something went wrong',
-          code: 400
-        }
-      })
+    res.send({
+      result: {
+        message: 'Something went wrong',
+        code: 400
+      }
+    })
   }
 }
 

@@ -5,68 +5,64 @@ const getRecipes = async (req, res) => {
   try {
     const getDataRecipe = await model.getAllRecipes()
 
-    res.send({ data: getDataRecipe.rows, jumlahDataRecipe: getDataRecipe.rowCount })
+    res.send({
+      data: getDataRecipe.rows,
+      jumlahDataRecipe: getDataRecipe.rowCount
+    })
   } catch (error) {
     console.log('error', error)
-    res.send(
-      {
-        result: {
-          message: 'Something went wrong',
-          code: 400
-        }
-      })
+    res.send({
+      result: {
+        message: 'Something went wrong',
+        code: 400
+      }
+    })
   }
 }
 
 const getRecipeId = async (req, res) => {
   try {
-    const { recipe_id } = req.params;
-    const getData = await model.getRecipeById(recipe_id);
+    const { recipe_id } = req.params
+    const getData = await model.getRecipeById(recipe_id)
 
     if (getData.rowCount > 0) {
       if (parseInt(recipe_id)) {
-        res.send(
-          {
-            data: getData.rows,
-            jumlahData: getData.rowCount
-          })
+        res.send({
+          data: getData.rows,
+          jumlahData: getData.rowCount
+        })
       } else {
         res.status(400).send('Invalid number!')
       }
-    } else
-      res.status(400).send('Recipe id not found!')
+    } else res.status(400).send('Recipe id not found!')
   } catch (error) {
     console.log('error', error)
-    res.send(
-      {
-        result: {
-          message: 'Something went wrong',
-          code: 400
-        }
-      })
+    res.send({
+      result: {
+        message: 'Something went wrong',
+        code: 400
+      }
+    })
   }
 }
-
 
 const getRecipeName = async (req, res) => {
   try {
     const { title } = req.params
     const getDataRecipe = await model.getRecipeByName(title)
 
-    res.send(
-      {
+    res.send({
       data: getDataRecipe.rows,
       jumlahData: getDataRecipe.rowCount
     })
   } catch (error) {
     console.log('error', error)
-    res.send(
-      {
-        result: {
-          message: 'Something went wrong',
-          code: 400
-        }
-      })
+    res.send({
+      result: {
+        message: 'Something went wrong',
+        code: 400
+      }
+    })
   }
 }
 
@@ -75,20 +71,18 @@ const getRecipeUser = async (req, res) => {
     const { user_id } = req.params
     const getDataRecipe = await model.getRecipeByUser(user_id)
 
-    res.send(
-      {
+    res.send({
       data: getDataRecipe.rows,
       jumlahData: getDataRecipe.rowCount
     })
   } catch (error) {
     console.log('error', error)
-    res.send(
-      {
-        result: {
-          message: 'Something went wrong',
-          code: 400
-        }
-      })
+    res.send({
+      result: {
+        message: 'Something went wrong',
+        code: 400
+      }
+    })
   }
 }
 
@@ -101,20 +95,18 @@ const getLatestRecipes = async (req, res) => {
     if (data > maxData) {
       data.length = maxData
     }
-    res.send(
-      { 
-        data, 
-        jumlahDataRecipe: data.length 
-      })
+    res.send({
+      data,
+      jumlahDataRecipe: data.length
+    })
   } catch (error) {
     console.log('error', error)
-    res.send(
-      {
-        result: {
-          message: 'Something went wrong',
-          code: 400
-        }
-      })
+    res.send({
+      result: {
+        message: 'Something went wrong',
+        code: 400
+      }
+    })
   }
 }
 
@@ -127,26 +119,23 @@ const addRecipe = async (req, res) => {
     const addRecipe = await model.addRecipe(recipes)
 
     if (addRecipe) {
-      res.send(
-        {
-          result: { 
-            message: 'Berhasil Menambahkan Data Recipe',
-            code: 200
-          }
+      res.send({
+        result: {
+          message: 'Berhasil Menambahkan Data Recipe',
+          code: 200
         }
-      )
+      })
     } else {
       res.status(400).send('data gagal di tambah')
     }
   } catch (error) {
     console.log('error', error)
-    res.send(
-      {
-        result: {
-          message: 'Something went wrong',
-          code: 400
-        }
-      })
+    res.send({
+      result: {
+        message: 'Something went wrong',
+        code: 400
+      }
+    })
   }
 }
 
@@ -189,13 +178,12 @@ const editRecipe = async (req, res) => {
     }
   } catch (error) {
     console.log(error)
-    res.send(
-      {
-        result: {
-          message: 'Something went wrong',
-          code: 400
-        }
-      })
+    res.send({
+      result: {
+        message: 'Something went wrong',
+        code: 400
+      }
+    })
   }
 }
 
@@ -219,13 +207,12 @@ const deleteRecipe = async (req, res) => {
     }
   } catch (error) {
     console.log(error)
-    res.send(
-      {
-        result: {
-          message: 'Something went wrong',
-          code: 400
-        }
-      })
+    res.send({
+      result: {
+        message: 'Something went wrong',
+        code: 400
+      }
+    })
   }
 }
 
