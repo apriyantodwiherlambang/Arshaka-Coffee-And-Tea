@@ -16,7 +16,7 @@ app.use(helmet())
 app.use(cors())
 
 app.use(express.json()) // parse application/json
-app.use(bodyParser.urlencoded({ extended: true })) // parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: false })) // parse application/x-www-form-urlencoded
 
 app.post('/test', (req, res) => {
   res.json({ requestBody: req.body }) // <==== req.body will be a parsed JSON object

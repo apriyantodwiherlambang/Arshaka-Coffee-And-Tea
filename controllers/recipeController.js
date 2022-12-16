@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 const model = require('../model/recipeModel')
 const moment = require('moment')
 
