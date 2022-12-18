@@ -12,9 +12,8 @@ const recipeRoutes = require('./routes/recipesRoutes')
 const commentRoutes = require('./routes/commentsRoutes')
 const authRoutes = require('./routes/authRoutes')
 
-app.use(helmet())
-// app.use(cors())
-
+app.use(helmet()) // app.use(cors())
+app.use(bodyParser.json()) // parse application/json
 app.use(express.json()) // parse application/json
 app.use(bodyParser.urlencoded({ extended: false })) // parse application/x-www-form-urlencoded
 
@@ -34,10 +33,15 @@ const corsOptionsDelegate = function (req, callback) {
   callback(null, corsOptions) // callback expects two parameters: error and options
 }
 
-app.use('/users', cors(corsOptionsDelegate), userRoutes) // Define all user routes
-app.use('/recipes', cors(corsOptionsDelegate), recipeRoutes) // Define all recipes
-app.use('/comments', cors(corsOptionsDelegate), commentRoutes) // Define all comments
+// Define all routes
+app.use('/users', cors(corsOptionsDelegate), userRoutes)
+app.use('/recipes', cors(corsOptionsDelegate), recipeRoutes)
+app.use('/comments', cors(corsOptionsDelegate), commentRoutes)
 app.use('/auth', cors(corsOptionsDelegate), authRoutes)
+
+app.use('*', (req, res) => {
+  res.send('Sukses')
+})
 
 // end of bottom code
 app.listen(port, () => {
