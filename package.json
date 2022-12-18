@@ -16,7 +16,7 @@
   },
   "scripts": {
     "lint:scripts": "eslint --fix --ext .js --ignore-path .gitignore .",
-    "start": "nodemon index.js"
+    "start": "node index.js"
   },
   "devDependencies": {
     "eslint": "^8.18.0",
