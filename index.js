@@ -40,7 +40,7 @@ app.use('/recipes', cors(corsOptionsDelegate), recipeRoutes)
 app.use('/comments', cors(corsOptionsDelegate), commentRoutes)
 app.use('/auth', cors(corsOptionsDelegate), authRoutes)
 
-app.use('', (req, res) => {
+app.use('*', (req, res) => {
   res.send('Sukses')
 })
 

@@ -16,7 +16,9 @@
   },
   "scripts": {
     "lint:scripts": "eslint --fix --ext .js --ignore-path .gitignore .",
-    "start": "node index.js"
+    "start": "npm run test && npm run build && node index.js",
+    "build": "echo \"Build process\"",
+    "test": "echo \"Starting Testing\""
   },
   "devDependencies": {
     "eslint": "^8.18.0",

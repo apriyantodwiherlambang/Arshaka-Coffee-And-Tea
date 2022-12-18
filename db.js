@@ -1,6 +1,6 @@
 const { Pool, Client } = require('pg')
 require('dotenv').config()
-const Postgre = require('pg').Pool
+// const Postgre = require('pg').Pool
 
 let connection
 
