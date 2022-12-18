@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 const Router = require('express').Router()
 const controller = require('../controllers/userController')
 const middleware = require('../middleware/verifyToken')

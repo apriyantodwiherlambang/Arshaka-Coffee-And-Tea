@@ -12,7 +12,8 @@ const recipeRoutes = require('./routes/recipesRoutes')
 const commentRoutes = require('./routes/commentsRoutes')
 const authRoutes = require('./routes/authRoutes')
 
-app.use(helmet()) // app.use(cors())
+app.use(helmet())
+app.use(cors())
 app.use(bodyParser.json()) // parse application/json
 app.use(express.json()) // parse application/json
 app.use(bodyParser.urlencoded({ extended: false })) // parse application/x-www-form-urlencoded
@@ -22,7 +23,7 @@ app.post('/test', (req, res) => {
 })
 
 // use cors for all
-const allowlist = ['https://www.bca.co.id', 'https://blubybcadigital.id']
+const allowlist = ['https://pijar-express-learningg.herokuapp.com']
 const corsOptionsDelegate = function (req, callback) {
   let corsOptions
   if (allowlist.indexOf(req.header('Origin')) !== -1) {
